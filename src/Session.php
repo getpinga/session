@@ -11,7 +11,7 @@
 
 namespace Pinga\Session;
 
-use Delight\Http\ResponseHeader;
+use Pinga\Http\ResponseHeader;
 
 /**
  * Session management with improved cookie handling
