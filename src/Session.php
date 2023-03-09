@@ -29,7 +29,7 @@ final class Session {
 	 *
 	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `None`, `Lax` or `Strict`)
 	 */
-	public static function start($sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
+	public static function start($sameSiteRestriction = \Pinga\Cookie\Cookie::SAME_SITE_RESTRICTION_LAX) {
 		// run PHP's built-in equivalent
 		\session_start();
 
@@ -64,7 +64,7 @@ final class Session {
 	 * @param bool $deleteOldSession whether to delete the old session or not
 	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `None`, `Lax` or `Strict`)
 	 */
-	public static function regenerate($deleteOldSession = false, $sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
+	public static function regenerate($deleteOldSession = false, $sameSiteRestriction = \Pinga\Cookie\Cookie::SAME_SITE_RESTRICTION_LAX) {
 		// run PHP's built-in equivalent
 		\session_regenerate_id($deleteOldSession);
 
@@ -146,7 +146,7 @@ final class Session {
 	 *
 	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `None`, `Lax` or `Strict`)
 	 */
-	private static function rewriteCookieHeader($sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
+	private static function rewriteCookieHeader($sameSiteRestriction = \Pinga\Cookie\Cookie::SAME_SITE_RESTRICTION_LAX) {
 		// get and remove the original cookie header set by PHP
 		$originalCookieHeader = ResponseHeader::take('Set-Cookie', \session_name() . '=');
 
@@ -160,7 +160,7 @@ final class Session {
 				// apply the supplied same-site restriction
 				$parsedCookie->setSameSiteRestriction($sameSiteRestriction);
 
-				if ($parsedCookie->getSameSiteRestriction() === Cookie::SAME_SITE_RESTRICTION_NONE && !$parsedCookie->isSecureOnly()) {
+				if ($parsedCookie->getSameSiteRestriction() === \Pinga\Cookie\Cookie::SAME_SITE_RESTRICTION_NONE && !$parsedCookie->isSecureOnly()) {
 					\trigger_error('You may have to enable the \'session.cookie_secure\' directive in the configuration in \'php.ini\' or via the \'ini_set\' function', \E_USER_WARNING);
 				}
 
