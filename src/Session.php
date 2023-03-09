@@ -153,7 +153,7 @@ final class Session {
 		// if a cookie header has been found
 		if (isset($originalCookieHeader)) {
 			// parse it into a cookie instance
-			$parsedCookie = Cookie::parse($originalCookieHeader);
+			$parsedCookie = \Pinga\Cookie\Cookie::parse($originalCookieHeader);
 
 			// if the cookie has successfully been parsed
 			if (isset($parsedCookie)) {
